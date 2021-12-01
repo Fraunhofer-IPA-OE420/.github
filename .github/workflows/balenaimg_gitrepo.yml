@@ -11,7 +11,7 @@ on:
     inputs:
       aarch_version:
         required: true
-        default: 'generic-aarch64'
+        default: generic-aarch64
         type: string
 
 env:
