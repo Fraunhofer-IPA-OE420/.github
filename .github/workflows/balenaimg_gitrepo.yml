@@ -61,11 +61,12 @@ jobs:
           echo "IMG=${IMAGE_NAME,,}" >>${GITHUB_ENV}
       - name: downcase metrics NAME
         run: |
-          echo "AARCH=${inputs.aarch,,}" >>${GITHUB_ENV}
+          echo "AARCH=${inputs.aarch}" >>${GITHUB_ENV}
       - name: check metrics NAME
         run: |
           echo " ${REPO}/${IMG}:${{ inputs.aarch }}"
           echo " ${{ steps.meta.outputs.tags }}" 
+
       - name: Build and push Docker image python 
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
@@ -73,6 +74,6 @@ jobs:
           #platforms: linux/arm64/v8, linux/amd64, linux/arm/v7 
           context: .
           file: ./Dockerfile.template
-          tags: ${{ env.REPO }}/${{ env.IMG }}:${{ inputs.aarch }}"
-          build-args: AARCH=${{ inputs.aarch }}"
-          labels: ${{ inputs.aarch }}" 
+          tags: ${{ env.REPO }}/${{ env.IMG }}:${{ env.AARCH }}"
+          build-args: AARCH=${{ env.AARCH }}"
+          labels: ${{ env.AARCH }}" 
