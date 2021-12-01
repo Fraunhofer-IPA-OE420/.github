@@ -72,5 +72,5 @@ jobs:
           context: .
           file: ./Dockerfile.template
           tags: ${{ env.REPO }}/${{ env.IMG }}:${{ env.AARCH }}
-          build-args: AARCH=${{ env.AARCH }}"
-          labels: ${{ env.AARCH }}" 
+          build-args: AARCH=${{AARCH }}
+          labels: ${AARCH}
