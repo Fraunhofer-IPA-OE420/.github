@@ -1,0 +1,5 @@
+{
+    "name": "Push Balena base image arch to ghcr.io",
+    "description": "Push Balena base image from Docker.template file depened on arch to ghcr.io. Find Balena Base image names here https://www.balena.io/docs/reference/base-images/devicetypes/",
+    "iconName": "example-icon"
+}
