@@ -72,5 +72,5 @@ jobs:
           context: .
           file: ./Dockerfile.template
           tags: ${{ env.REPO }}/${{ env.IMG }}:${{ env.AARCH }}
-          build-args: AARCH_BALENA_IMAGE=${AARCH}
+          build-args: AARCH_BALENA_IMAGE = ${AARCH}
           labels: ${AARCH}
