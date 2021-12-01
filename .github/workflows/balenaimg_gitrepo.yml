@@ -17,6 +17,7 @@ on:
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
+  BALENA_AARCH: ${{inputs.aarch_version}}
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
@@ -61,7 +62,7 @@ jobs:
           echo "IMG=${IMAGE_NAME,,}" >>${GITHUB_ENV}
       - name: downcase metrics NAME
         run: |
-          echo "AARCH=${ inputs.aarch_version,, }" >>${GITHUB_ENV}
+          echo "AARCH=${BALENA_AARCH,,}" >>${GITHUB_ENV}
       - name: check metrics NAME
         run: |
           echo " ${REPO}/${IMG}:${AARCH}"
