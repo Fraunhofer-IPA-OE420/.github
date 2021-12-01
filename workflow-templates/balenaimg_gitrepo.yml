@@ -1,9 +1,6 @@
 name: Generic Balena docker push
 
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
+######################Balena Base image names here https://www.balena.io/docs/reference/base-images/devicetypes/ ################### 
 
 on:
   push:
@@ -16,14 +13,10 @@ on:
         required: true
         default: 'generic-aarch64'
         type: string
-    secrets:
 
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
-  ######################Balena Base image names here https://www.balena.io/docs/reference/base-images/devicetypes/ ################### 
-  BALENA_MACHINE_NAME: generic
-  #####################################################################
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
