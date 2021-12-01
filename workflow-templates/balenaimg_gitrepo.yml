@@ -1,12 +1,22 @@
-name: Push Balena base image arch to ghcr.io
+name: Generic AMD64
 
-######################Balena Base image names here https://www.balena.io/docs/reference/base-images/devicetypes/ ################### 
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
 
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  workflow_call:    
+    inputs:
+      aarch:
+        required: true
+        default: 'generic-aarch64'
+        type: string
+    secrets:
 
 env:
   # Use docker.io for Docker Hub if empty
@@ -58,10 +68,10 @@ jobs:
           echo "IMG=${IMAGE_NAME,,}" >>${GITHUB_ENV}
       - name: downcase metrics NAME
         run: |
-          echo "AARCH=${BALENA_MACHINE_NAME,,}" >>${GITHUB_ENV}
+          echo "AARCH=${inputs.aarch,,}" >>${GITHUB_ENV}
       - name: check metrics NAME
         run: |
-          echo " ${REPO}/${IMG}:${AARCH}"
+          echo " ${REPO}/${IMG}:${{ inputs.aarch }}"
           echo " ${{ steps.meta.outputs.tags }}" 
       - name: Build and push Docker image python 
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
@@ -70,6 +80,6 @@ jobs:
           #platforms: linux/arm64/v8, linux/amd64, linux/arm/v7 
           context: .
           file: ./Dockerfile.template
-          tags: ${{ env.REPO }}/${{ env.IMG }}:${{ env.AARCH }}
-          build-args: AARCH=${{ env.AARCH }}
-          labels: ${AARCH} 
+          tags: ${{ env.REPO }}/${{ env.IMG }}:${{ inputs.aarch }}"
+          build-args: AARCH=${{ inputs.aarch }}"
+          labels: ${{ inputs.aarch }}" 
