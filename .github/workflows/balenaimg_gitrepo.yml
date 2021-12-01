@@ -64,7 +64,7 @@ jobs:
           echo "AARCH=${{ inputs.aarch_version },,}" >>${GITHUB_ENV}
       - name: check metrics NAME
         run: |
-          echo " ${REPO}/${IMG}:${{ inputs.aarch }}"
+          echo " ${REPO}/${IMG}:${AARCH}"
           echo " ${{ steps.meta.outputs.tags }}" 
 
       - name: Build and push Docker image python 
